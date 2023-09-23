@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524572247498",
+    "project_id": "khadamat-f5821",
+    "storage_bucket": "khadamat-f5821.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524572247498:android:e2a699700d7085dbb47b33",
+        "android_client_info": {
+          "package_name": "com.example.khadamat_dashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLZYis5myZt68bMzEtL3jyahFovvhrYuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
