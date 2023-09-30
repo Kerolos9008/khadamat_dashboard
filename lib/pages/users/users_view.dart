@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:khadamat_dashboard/pages/addAdmin/add_admin_view.dart';
+import 'package:khadamat_dashboard/pages/addUser/add_user_view.dart';
 import 'package:khadamat_dashboard/pages/admins/admins_datasource.dart';
+import 'package:khadamat_dashboard/pages/users/users_datasource.dart';
 import 'package:khadamat_dashboard/pages/users/users_view_model.dart';
 import 'package:pmvvm/pmvvm.dart';
 
@@ -143,7 +145,7 @@ class _UsersView extends StatelessView<UsersViewModel> {
                           DataColumn(
                             label: Expanded(
                               child: Text(
-                                "الصلاحيات",
+                                "المشروع",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Color(0xFF7A9CBC),
@@ -155,7 +157,43 @@ class _UsersView extends StatelessView<UsersViewModel> {
                           DataColumn(
                             label: Expanded(
                               child: Text(
-                                "حذف",
+                                "العمارة",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFF7A9CBC),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataColumn(
+                            label: Expanded(
+                              child: Text(
+                                "الشقة",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFF7A9CBC),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataColumn(
+                            label: Expanded(
+                              child: Text(
+                                "عدد التذاكر",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFF7A9CBC),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataColumn(
+                            label: Expanded(
+                              child: Text(
+                                "تعديل",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Color(0xFF7A9CBC),
@@ -165,11 +203,10 @@ class _UsersView extends StatelessView<UsersViewModel> {
                             ),
                           ),
                         ],
-                        source: AdminsDataSource(
+                        source: UsersDataSource(
                           snapshot.data!.docs,
                           context,
-                          modify: viewModel.modifyAdmin,
-                          delete: viewModel.deleteAdmin,
+                          modify: viewModel.modifyUser,
                         ),
                       ),
                     );
@@ -179,16 +216,16 @@ class _UsersView extends StatelessView<UsersViewModel> {
             ),
           ],
         ),
-        AddAdminScreen(
+        AddUserScreen(
           onBackPressed: () {
             viewModel.pageController.jumpToPage(0);
           },
         ),
-        AddAdminScreen(
+        AddUserScreen(
           onBackPressed: () {
             viewModel.pageController.jumpToPage(0);
           },
-          admin: viewModel.toModify,
+          user: viewModel.toModify,
         )
       ],
     );

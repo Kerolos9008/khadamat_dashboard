@@ -104,8 +104,8 @@ class AddAdminViewModel extends ViewModel {
       if (userCanAddAdmins == false) {
         buttonLoading = false;
         notifyListeners();
-
         ToastService.showErrorToast(message: "ليس لديك الصلاحيات المطلوبة");
+        return;
       }
       final count = await FirebaseFirestore.instance
           .collection("/Admins")
@@ -142,7 +142,7 @@ class AddAdminViewModel extends ViewModel {
             "closeTicket": closeTicket,
             "addAdmins": addAdmins,
           },
-          "createdAt": DateTime.now().millisecondsSinceEpoch,
+          "createdAt": admin?["createdAt"],
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });
         buttonLoading = false;

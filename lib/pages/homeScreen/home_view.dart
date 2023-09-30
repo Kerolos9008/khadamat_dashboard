@@ -47,15 +47,7 @@ class _HomeView extends StatelessView<HomeViewModel> {
                   child: Image.asset("assets/images/logo.png"),
                 ),
                 footer: GestureDetector(
-                  onTap: () {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const MobileScreen(),
-                      ),
-                      (route) => true,
-                    );
-                  },
+                  onTap: viewModel.logout,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 50),
                     width: MediaQuery.of(context).size.width,
@@ -329,8 +321,8 @@ class _HomeView extends StatelessView<HomeViewModel> {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: viewModel.pageController,
                         children: const [
-                          AdminsScreen(),
-                          AdminsScreen(),
+                          SizedBox(),
+                          SizedBox(),
                           UsersScreen(),
                           AdminsScreen(),
                         ],
