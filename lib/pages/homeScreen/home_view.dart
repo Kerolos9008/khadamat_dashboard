@@ -106,13 +106,17 @@ class _HomeView extends StatelessView<HomeViewModel> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            (viewModel.sideMenuController.currentPage == 0)
-                                ? KhadamatIcons.homeFilled
-                                : KhadamatIcons.home,
-                            color: const Color(0xFF43617D),
-                            size: 24,
-                          ),
+                          (viewModel.sideMenuController.currentPage == 0)
+                              ? const Icon(
+                                  KhadamatIcons.homeFilled,
+                                  color: Color(0xFF43617D),
+                                  size: 24,
+                                )
+                              : Image.asset(
+                                  "assets/images/home.png",
+                                  width: 24,
+                                  height: 24,
+                                ),
                           const SizedBox(
                             width: 20,
                           ),
@@ -184,13 +188,17 @@ class _HomeView extends StatelessView<HomeViewModel> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            (viewModel.sideMenuController.currentPage == 2)
-                                ? KhadamatIcons.peopleFilled
-                                : KhadamatIcons.people,
-                            color: const Color(0xFF43617D),
-                            size: 24,
-                          ),
+                          (viewModel.sideMenuController.currentPage == 2)
+                              ? const Icon(
+                                  KhadamatIcons.peopleFilled,
+                                  color: Color(0xFF43617D),
+                                  size: 24,
+                                )
+                              : Image.asset(
+                                  "assets/images/users.png",
+                                  width: 24,
+                                  height: 24,
+                                ),
                           const SizedBox(
                             width: 20,
                           ),
@@ -223,13 +231,17 @@ class _HomeView extends StatelessView<HomeViewModel> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            (viewModel.sideMenuController.currentPage == 3)
-                                ? KhadamatIcons.profileFilled
-                                : KhadamatIcons.profile,
-                            color: const Color(0xFF43617D),
-                            size: 24,
-                          ),
+                          (viewModel.sideMenuController.currentPage == 3)
+                              ? const Icon(
+                                  KhadamatIcons.profileFilled,
+                                  color: Color(0xFF43617D),
+                                  size: 24,
+                                )
+                              : Image.asset(
+                                  "assets/images/admins.png",
+                                  width: 24,
+                                  height: 24,
+                                ),
                           const SizedBox(
                             width: 20,
                           ),

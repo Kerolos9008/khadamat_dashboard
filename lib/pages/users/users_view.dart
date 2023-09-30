@@ -82,7 +82,7 @@ class _UsersView extends StatelessView<UsersViewModel> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(
-                  width: 1260,
+                  width: 990,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                   decoration: BoxDecoration(

@@ -78,7 +78,6 @@ class _AddAdminView extends StatelessView<AddAdminViewModel> {
                               key: viewModel.nameShakeKey,
                               shakeOffset: 10,
                               child: TextFormField(
-                                enabled: viewModel.admin == null,
                                 initialValue: viewModel.admin?["name"],
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -138,7 +137,6 @@ class _AddAdminView extends StatelessView<AddAdminViewModel> {
                                 key: viewModel.mobileShakeKey,
                                 shakeOffset: 10,
                                 child: IntlPhoneField(
-                                  enabled: viewModel.admin == null,
                                   initialValue: viewModel.admin?["phone"],
                                   flagsButtonMargin:
                                       const EdgeInsets.only(left: 20),

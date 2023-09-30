@@ -81,7 +81,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: 167.616,
+            width: 100,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -99,7 +99,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: 167.616,
+            width: 100,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -117,7 +117,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: 167.616,
+            width: 100,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -135,7 +135,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: 167.616,
+            width: 100,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
               borderRadius: BorderRadius.only(

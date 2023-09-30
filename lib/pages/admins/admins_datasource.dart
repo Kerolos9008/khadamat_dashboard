@@ -59,7 +59,7 @@ class AdminsDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.17,
+            width: MediaQuery.of(context).size.width * 0.14,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -91,7 +91,7 @@ class AdminsDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.17,
+            width: MediaQuery.of(context).size.width * 0.14,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
               borderRadius: BorderRadius.only(
