@@ -75,6 +75,7 @@ class _MobileView extends StatelessView<MobileViewModel> {
                       child: Directionality(
                         textDirection: TextDirection.ltr,
                         child: IntlPhoneField(
+                          flagsButtonMargin: const EdgeInsets.only(left: 20),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
                             LengthLimitingTextInputFormatter(9,
@@ -82,7 +83,6 @@ class _MobileView extends StatelessView<MobileViewModel> {
                                     MaxLengthEnforcement.enforced),
                           ],
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          countrySelectenabled: false,
                           showDropdownIcon: false,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(20),

@@ -58,10 +58,11 @@ class OTPViewModel extends ViewModel {
       debugPrint(value.toString());
       buttonLoading = false;
       notifyListeners();
-      Navigator.of(context).push(
+      Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const HomeScreen(),
         ),
+        (route) => true,
       );
     }).catchError((error) {
       buttonLoading = false;

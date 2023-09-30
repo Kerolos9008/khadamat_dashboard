@@ -20,12 +20,11 @@ class MobileViewModel extends ViewModel {
       notifyListeners();
       final user = await FirebaseFirestore.instance
           .collection("/Admins")
-          .doc(phoneNumber)
+          .where("phone", isEqualTo: phoneNumber)
+          .count()
           .get();
-      debugPrint(user.exists.toString());
-      debugPrint(user.data().toString());
 
-      if (user.exists) {
+      if (user.count == 1) {
         FirebaseAuth.instance.signInWithPhoneNumber(phoneNumber!).then((value) {
           debugPrint(value.verificationId);
           buttonLoading = false;

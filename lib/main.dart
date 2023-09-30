@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khadamat_dashboard/firebase_options.dart';
+import 'package:khadamat_dashboard/pages/homeScreen/home_view.dart';
 import 'package:khadamat_dashboard/pages/mobileScreen/mobile_view.dart';
 
 void main() async {
@@ -29,14 +31,16 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('ar'),
+        Locale('ar', 'SA'),
       ],
-      locale: const Locale('ar'),
+      locale: const Locale('ar', 'SA'),
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MobileScreen(),
+      home: (FirebaseAuth.instance.currentUser != null)
+          ? const HomeScreen()
+          : const MobileScreen(),
     );
   }
 }
