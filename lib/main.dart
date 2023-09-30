@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khadamat_dashboard/firebase_options.dart';
 import 'package:khadamat_dashboard/pages/homeScreen/home_view.dart';
 import 'package:khadamat_dashboard/pages/mobileScreen/mobile_view.dart';
+import 'package:khadamat_dashboard/services/custom_scroll_behaviour.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: MyCustomScrollBehavior(),
       builder: FToastBuilder(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

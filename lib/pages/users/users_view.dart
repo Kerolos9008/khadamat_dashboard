@@ -82,10 +82,7 @@ class _UsersView extends StatelessView<UsersViewModel> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(
-                  constraints: const BoxConstraints(
-                    minWidth: 1260,
-                    maxWidth: 1260,
-                  ),
+                  width: 1260,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                   decoration: BoxDecoration(
@@ -123,11 +120,11 @@ class _UsersView extends StatelessView<UsersViewModel> {
                           rowsPerPage:
                               (MediaQuery.of(context).size.height - 400 - 90) ~/
                                   80,
-                          columns: [
+                          columns: const [
                             DataColumn(
                               label: Expanded(
                                 child: Text(
-                                  "${MediaQuery.of(context).size.width}",
+                                  "الإسم",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Color(0xFF7A9CBC),

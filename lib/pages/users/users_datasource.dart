@@ -24,7 +24,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
               borderRadius: BorderRadius.only(
@@ -45,7 +45,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -63,7 +63,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -81,7 +81,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -99,7 +99,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -117,7 +117,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
             ),
@@ -135,7 +135,7 @@ class UsersDataSource extends DataTableSource {
           Container(
             alignment: Alignment.center,
             height: 60,
-            width: MediaQuery.of(context).size.width * 0.097,
+            width: 167.616,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F7F8),
               borderRadius: BorderRadius.only(

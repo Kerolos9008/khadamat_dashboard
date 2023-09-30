@@ -109,6 +109,7 @@ class AddUserViewModel extends ViewModel {
           "project": project,
           "building": building,
           "appartment": appartment,
+          "tickets": [],
           "createdAt": DateTime.now().millisecondsSinceEpoch,
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });
@@ -127,6 +128,7 @@ class AddUserViewModel extends ViewModel {
           "project": project,
           "building": building,
           "appartment": appartment,
+          "tickets": user?["tickets"],
           "createdAt": user?["createdAt"],
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });

@@ -43,13 +43,13 @@ class _HomeView extends StatelessView<HomeViewModel> {
                 controller: viewModel.sideMenuController,
                 title: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 44, vertical: 40),
+                      const EdgeInsets.symmetric(horizontal: 44, vertical: 30),
                   child: Image.asset("assets/images/logo.png"),
                 ),
                 footer: GestureDetector(
                   onTap: viewModel.logout,
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 50),
+                    margin: const EdgeInsets.only(bottom: 40),
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +86,7 @@ class _HomeView extends StatelessView<HomeViewModel> {
                   displayMode: SideMenuDisplayMode.open,
                   itemOuterPadding: const EdgeInsets.symmetric(
                     horizontal: 15,
-                    vertical: 20,
+                    vertical: 15,
                   ),
                   itemBorderRadius: BorderRadius.circular(32),
                   selectedColor: const Color(0xFFB5D3DB),
