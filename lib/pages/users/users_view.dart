@@ -79,138 +79,145 @@ class _UsersView extends StatelessView<UsersViewModel> {
             ),
             const SizedBox(height: 25),
             Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                ),
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: viewModel.collectionStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return const Center(
-                        child: Text('Something went wrong'),
-                      );
-                    }
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  constraints: const BoxConstraints(
+                    minWidth: 1260,
+                    maxWidth: 1260,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                  ),
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: viewModel.collectionStream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Center(
+                          child: Text('Something went wrong'),
+                        );
+                      }
 
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Color(0xFF43617D),
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF43617D),
+                          ),
+                        );
+                      }
+
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          shadowColor: Colors.transparent,
+                          dividerColor: Colors.transparent,
+                        ),
+                        child: PaginatedDataTable(
+                          columnSpacing: 0,
+                          horizontalMargin: 0,
+                          dataRowHeight: 80,
+                          headingRowHeight: 90,
+                          rowsPerPage:
+                              (MediaQuery.of(context).size.height - 400 - 90) ~/
+                                  80,
+                          columns: [
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "${MediaQuery.of(context).size.width}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "رقم الجوال",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "المشروع",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "العمارة",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "الشقة",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "عدد التذاكر",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  "تعديل",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A9CBC),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                          source: UsersDataSource(
+                            snapshot.data!.docs,
+                            context,
+                            modify: viewModel.modifyUser,
+                          ),
                         ),
                       );
-                    }
-
-                    return Theme(
-                      data: Theme.of(context).copyWith(
-                        shadowColor: Colors.transparent,
-                        dividerColor: Colors.transparent,
-                      ),
-                      child: PaginatedDataTable(
-                        columnSpacing: 0,
-                        horizontalMargin: 0,
-                        dataRowHeight: 80,
-                        headingRowHeight: 90,
-                        rowsPerPage:
-                            (MediaQuery.of(context).size.height - 400 - 90) ~/
-                                80,
-                        columns: const [
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "الإسم",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "رقم الجوال",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "المشروع",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "العمارة",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "الشقة",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "عدد التذاكر",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Expanded(
-                              child: Text(
-                                "تعديل",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF7A9CBC),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                        source: UsersDataSource(
-                          snapshot.data!.docs,
-                          context,
-                          modify: viewModel.modifyUser,
-                        ),
-                      ),
-                    );
-                  },
+                    },
+                  ),
                 ),
               ),
             ),
