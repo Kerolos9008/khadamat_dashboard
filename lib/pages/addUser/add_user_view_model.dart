@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:khadamat_dashboard/services/toast_service.dart';
 import 'package:khadamat_dashboard/widgets/shake_widget.dart';
@@ -95,6 +96,20 @@ class AddUserViewModel extends ViewModel {
         validateAppartment()) {
       buttonLoading = true;
       notifyListeners();
+      final users = await FirebaseFirestore.instance
+          .collection("/Admins")
+          .where(
+            "phone",
+            isEqualTo: FirebaseAuth.instance.currentUser!.phoneNumber,
+          )
+          .get();
+      final userCanAddAdmins = users.docs.first.data()["roles"]["addAdmins"];
+      if (userCanAddAdmins == false) {
+        buttonLoading = false;
+        notifyListeners();
+        ToastService.showErrorToast(message: "ليس لديك الصلاحيات المطلوبة");
+        return;
+      }
 
       final count = await FirebaseFirestore.instance
           .collection("/Users")
@@ -109,7 +124,7 @@ class AddUserViewModel extends ViewModel {
           "project": project,
           "building": building,
           "appartment": appartment,
-          "tickets": [],
+          "ticketCount": 0,
           "createdAt": DateTime.now().millisecondsSinceEpoch,
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });
@@ -128,7 +143,7 @@ class AddUserViewModel extends ViewModel {
           "project": project,
           "building": building,
           "appartment": appartment,
-          "tickets": user?["tickets"],
+          "ticketCount": user?["ticketCount"],
           "createdAt": user?["createdAt"],
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });

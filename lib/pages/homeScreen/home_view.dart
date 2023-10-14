@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khadamat_dashboard/pages/admins/admins_view.dart';
 import 'package:khadamat_dashboard/pages/mobileScreen/mobile_view.dart';
+import 'package:khadamat_dashboard/pages/tickets/tickets_view.dart';
 import 'package:khadamat_dashboard/pages/users/users_view.dart';
 import 'package:khadamat_dashboard/services/khadamat_icons_icons.dart';
 import 'package:pmvvm/pmvvm.dart';
@@ -334,7 +335,7 @@ class _HomeView extends StatelessView<HomeViewModel> {
                         controller: viewModel.pageController,
                         children: const [
                           SizedBox(),
-                          SizedBox(),
+                          TicketsScreen(),
                           UsersScreen(),
                           AdminsScreen(),
                         ],
