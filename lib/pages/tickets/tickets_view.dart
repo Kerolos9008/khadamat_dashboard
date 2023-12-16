@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:khadamat_dashboard/pages/ticketDetailsScreen/ticket_details_view.dart';
 import 'package:khadamat_dashboard/pages/tickets/tickets_datasource.dart';
 import 'package:khadamat_dashboard/pages/tickets/tickets_view_model.dart';
 import 'package:pmvvm/pmvvm.dart';
@@ -11,6 +12,7 @@ class TicketsScreen extends StatelessWidget {
     return MVVM<TicketsViewModel>(
       view: () => const _TicketsView(),
       viewModel: TicketsViewModel(),
+      disposeVM: false,
     );
   }
 }
@@ -191,7 +193,7 @@ class _TicketsView extends StatelessView<TicketsViewModel> {
                           source: TicketsDataSource(
                             snapshot.data!.docs,
                             context,
-                            open: viewModel.modifyUser,
+                            open: viewModel.enterTicket,
                           ),
                         ),
                       );
@@ -201,6 +203,11 @@ class _TicketsView extends StatelessView<TicketsViewModel> {
               ),
             ),
           ],
+        ),
+        TicketDetailsScreen(
+          onBackPressed: () {
+            viewModel.pageController.jumpToPage(0);
+          },
         ),
       ],
     );

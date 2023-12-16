@@ -47,6 +47,10 @@ dependencies:
   cloud_firestore: ^4.9.2
   fluttertoast: ^8.2.2
   easy_sidemenu: ^0.4.2
+  image_picker: ^1.0.4
+  permission_handler: ^11.0.1
+  firebase_storage: ^11.2.8
+  uuid: ^4.1.0
 
 dev_dependencies:
   flutter_test:

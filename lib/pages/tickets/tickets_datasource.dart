@@ -19,167 +19,211 @@ class TicketsDataSource extends DataTableSource {
     Map<String, dynamic> data =
         _ticketsList[index].data()! as Map<String, dynamic>;
     data["id"] = _ticketsList[index].id;
-    print(data);
     return DataRow(
       cells: [
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 147.616,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20),
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 147.616,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
               ),
-            ),
-            child: Text(
-              data["customer"]["project"],
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
-        DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 147.616,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: Text(
-              DateTime.fromMillisecondsSinceEpoch(data["createdAt"])
-                  .toString()
-                  .split(" ")[0],
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
+              child: Text(
+                data["customer"]["project"],
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: Text(
-              data["id"],
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 147.616,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: Text(
+                DateTime.fromMillisecondsSinceEpoch(data["createdAt"])
+                    .toString()
+                    .split(" ")[0],
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: Text(
-              data["customer"]["building"],
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: Text(
+                data["id"],
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: Text(
-              data["customer"]["appartment"],
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: Text(
+                data["customer"]["building"],
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: Text(
-              data["service"],
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: Text(
+                data["customer"]["appartment"],
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: SensitivityWidget(
-              sensitivity: SensitivityEnum.values[data["sensitivity"]],
-            ),
-          ),
-        ),
-        DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 147.616,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-            ),
-            child: Text(
-              data["customer"]["name"],
-              textDirection: TextDirection.rtl,
-              style: const TextStyle(
-                color: Color(0xFF43617D),
-                fontSize: 20,
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: Text(
+                data["service"],
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
         DataCell(
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF3F7F8),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                topLeft: Radius.circular(20),
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: SensitivityWidget(
+                sensitivity: SensitivityEnum.values[data["sensitivity"]],
               ),
             ),
-            child: StatusWidget(
-              status: StatusEnum.values[data["status"]],
+          ),
+        ),
+        DataCell(
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 147.616,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+              ),
+              child: Text(
+                data["customer"]["name"],
+                textDirection: TextDirection.rtl,
+                style: const TextStyle(
+                  color: Color(0xFF43617D),
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ),
+        ),
+        DataCell(
+          GestureDetector(
+            onTap: () {
+              open(data);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3F7F8),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  topLeft: Radius.circular(20),
+                ),
+              ),
+              child: StatusWidget(
+                status: StatusEnum.values[data["status"]],
+              ),
             ),
           ),
         ),
