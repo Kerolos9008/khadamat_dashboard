@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:khadamat_dashboard/widgets/shake_widget.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:pmvvm/view_model.dart';
 import 'package:uuid/uuid.dart';
 
 class TicketsViewModel extends ViewModel {
   PageController pageController = PageController();
-  late Stream<QuerySnapshot> collectionStream =
-      FirebaseFirestore.instance.collection('/Tickets').snapshots();
+  late Stream<QuerySnapshot> collectionStream = FirebaseFirestore.instance
+      .collection('/Tickets')
+      .orderBy('createdAt', descending: true)
+      .snapshots();
 
   Map<String, dynamic>? ticket;
   final caseDescriptionShakeKey = GlobalKey<ShakeWidgetState>();

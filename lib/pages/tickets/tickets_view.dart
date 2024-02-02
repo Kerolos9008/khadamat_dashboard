@@ -6,11 +6,15 @@ import 'package:khadamat_dashboard/pages/tickets/tickets_view_model.dart';
 import 'package:pmvvm/pmvvm.dart';
 
 class TicketsScreen extends StatelessWidget {
-  const TicketsScreen({super.key});
+  final String searchValue;
+  const TicketsScreen(
+    this.searchValue, {
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return MVVM<TicketsViewModel>(
-      view: () => const _TicketsView(),
+      view: () => _TicketsView(searchValue),
       viewModel: TicketsViewModel(),
       disposeVM: false,
     );
@@ -18,7 +22,8 @@ class TicketsScreen extends StatelessWidget {
 }
 
 class _TicketsView extends StatelessView<TicketsViewModel> {
-  const _TicketsView();
+  final String searchValue;
+  const _TicketsView(this.searchValue);
 
   @override
   Widget render(BuildContext context, TicketsViewModel viewModel) {
@@ -66,6 +71,12 @@ class _TicketsView extends StatelessView<TicketsViewModel> {
                           ),
                         );
                       }
+                      final filteredData = snapshot.data!.docs
+                          .where((element) => element.id
+                              .toString()
+                              .toLowerCase()
+                              .contains(searchValue.toLowerCase()))
+                          .toList();
 
                       return Theme(
                         data: Theme.of(context).copyWith(
@@ -191,7 +202,7 @@ class _TicketsView extends StatelessView<TicketsViewModel> {
                             ),
                           ],
                           source: TicketsDataSource(
-                            snapshot.data!.docs,
+                            filteredData,
                             context,
                             open: viewModel.enterTicket,
                           ),

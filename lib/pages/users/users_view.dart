@@ -1,25 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:khadamat_dashboard/pages/addAdmin/add_admin_view.dart';
 import 'package:khadamat_dashboard/pages/addUser/add_user_view.dart';
-import 'package:khadamat_dashboard/pages/admins/admins_datasource.dart';
 import 'package:khadamat_dashboard/pages/users/users_datasource.dart';
 import 'package:khadamat_dashboard/pages/users/users_view_model.dart';
 import 'package:pmvvm/pmvvm.dart';
 
 class UsersScreen extends StatelessWidget {
-  const UsersScreen({super.key});
+  final String searchValue;
+  const UsersScreen(this.searchValue, {super.key});
   @override
   Widget build(BuildContext context) {
     return MVVM<UsersViewModel>(
-      view: () => const _UsersView(),
+      view: () => _UsersView(searchValue),
       viewModel: UsersViewModel(),
     );
   }
 }
 
 class _UsersView extends StatelessView<UsersViewModel> {
-  const _UsersView();
+  final String searchValue;
+  const _UsersView(this.searchValue);
 
   @override
   Widget render(BuildContext context, UsersViewModel viewModel) {
@@ -106,6 +106,12 @@ class _UsersView extends StatelessView<UsersViewModel> {
                           ),
                         );
                       }
+                    final filteredData = snapshot.data!.docs
+                        .where((element) => element['phone']
+                            .toString()
+                            .toLowerCase()
+                            .contains(searchValue.toLowerCase()))
+                        .toList();
 
                       return Theme(
                         data: Theme.of(context).copyWith(
@@ -207,7 +213,7 @@ class _UsersView extends StatelessView<UsersViewModel> {
                             ),
                           ],
                           source: UsersDataSource(
-                            snapshot.data!.docs,
+                            filteredData,
                             context,
                             modify: viewModel.modifyUser,
                           ),

@@ -6,18 +6,20 @@ import 'package:pmvvm/pmvvm.dart';
 import 'package:khadamat_dashboard/pages/admins/admins_view_model.dart';
 
 class AdminsScreen extends StatelessWidget {
-  const AdminsScreen({super.key});
+  final String searchValue;
+  const AdminsScreen(this.searchValue, {super.key});
   @override
   Widget build(BuildContext context) {
     return MVVM<AdminsViewModel>(
-      view: () => const _AdminsView(),
+      view: () => _AdminsView(searchValue),
       viewModel: AdminsViewModel(),
     );
   }
 }
 
 class _AdminsView extends StatelessView<AdminsViewModel> {
-  const _AdminsView();
+  final String searchValue;
+  const _AdminsView(this.searchValue);
 
   @override
   Widget render(BuildContext context, AdminsViewModel viewModel) {
@@ -101,7 +103,12 @@ class _AdminsView extends StatelessView<AdminsViewModel> {
                         ),
                       );
                     }
-
+                    final filteredData = snapshot.data!.docs
+                        .where((element) => element['phone']
+                            .toString()
+                            .toLowerCase()
+                            .contains(searchValue.toLowerCase()))
+                        .toList();
                     return Theme(
                       data: Theme.of(context).copyWith(
                         shadowColor: Colors.transparent,
@@ -166,7 +173,7 @@ class _AdminsView extends StatelessView<AdminsViewModel> {
                           ),
                         ],
                         source: AdminsDataSource(
-                          snapshot.data!.docs,
+                          filteredData,
                           context,
                           modify: viewModel.modifyAdmin,
                           delete: viewModel.deleteAdmin,

@@ -1,9 +1,7 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khadamat_dashboard/pages/admins/admins_view.dart';
-import 'package:khadamat_dashboard/pages/mobileScreen/mobile_view.dart';
 import 'package:khadamat_dashboard/pages/tickets/tickets_view.dart';
 import 'package:khadamat_dashboard/pages/users/users_view.dart';
 import 'package:khadamat_dashboard/services/khadamat_icons_icons.dart';
@@ -107,22 +105,18 @@ class _HomeView extends StatelessView<HomeViewModel> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          (viewModel.sideMenuController.currentPage == 0)
-                              ? const Icon(
-                                  KhadamatIcons.homeFilled,
-                                  color: Color(0xFF43617D),
-                                  size: 24,
-                                )
-                              : Image.asset(
-                                  "assets/images/home.png",
-                                  width: 24,
-                                  height: 24,
-                                ),
+                          Icon(
+                            (viewModel.sideMenuController.currentPage == 0)
+                                ? KhadamatIcons.receiptFilled
+                                : KhadamatIcons.receipt,
+                            color: const Color(0xFF43617D),
+                            size: 24,
+                          ),
                           const SizedBox(
                             width: 20,
                           ),
                           Text(
-                            "لوحة التحكم",
+                            "التذاكر",
                             style: TextStyle(
                               color: const Color(0xFF43617D),
                               fontSize: 20,
@@ -150,18 +144,22 @@ class _HomeView extends StatelessView<HomeViewModel> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            (viewModel.sideMenuController.currentPage == 1)
-                                ? KhadamatIcons.receiptFilled
-                                : KhadamatIcons.receipt,
-                            color: const Color(0xFF43617D),
-                            size: 24,
-                          ),
+                          (viewModel.sideMenuController.currentPage == 1)
+                              ? const Icon(
+                                  KhadamatIcons.peopleFilled,
+                                  color: Color(0xFF43617D),
+                                  size: 24,
+                                )
+                              : Image.asset(
+                                  "assets/images/users.png",
+                                  width: 24,
+                                  height: 24,
+                                ),
                           const SizedBox(
                             width: 20,
                           ),
                           Text(
-                            "التذاكر",
+                            "العملاء",
                             style: TextStyle(
                               color: const Color(0xFF43617D),
                               fontSize: 20,
@@ -191,49 +189,6 @@ class _HomeView extends StatelessView<HomeViewModel> {
                         children: [
                           (viewModel.sideMenuController.currentPage == 2)
                               ? const Icon(
-                                  KhadamatIcons.peopleFilled,
-                                  color: Color(0xFF43617D),
-                                  size: 24,
-                                )
-                              : Image.asset(
-                                  "assets/images/users.png",
-                                  width: 24,
-                                  height: 24,
-                                ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "العملاء",
-                            style: TextStyle(
-                              color: const Color(0xFF43617D),
-                              fontSize: 20,
-                              fontWeight:
-                                  (viewModel.sideMenuController.currentPage ==
-                                          2)
-                                      ? FontWeight.w700
-                                      : FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SideMenuItem(
-                    priority: 3,
-                    onTap: (index, _) {
-                      viewModel.sideMenuController.changePage(index);
-                    },
-                    builder: (context, displayMode) => Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          (viewModel.sideMenuController.currentPage == 3)
-                              ? const Icon(
                                   KhadamatIcons.profileFilled,
                                   color: Color(0xFF43617D),
                                   size: 24,
@@ -253,7 +208,7 @@ class _HomeView extends StatelessView<HomeViewModel> {
                               fontSize: 20,
                               fontWeight:
                                   (viewModel.sideMenuController.currentPage ==
-                                          3)
+                                          2)
                                       ? FontWeight.w700
                                       : FontWeight.w500,
                             ),
@@ -292,6 +247,7 @@ class _HomeView extends StatelessView<HomeViewModel> {
                                   const EdgeInsetsDirectional.only(start: 15),
                               backgroundColor: const Color(0xFFEBF5F8),
                               borderRadius: BorderRadius.circular(24),
+                              onChanged: viewModel.search,
                             ),
                           ),
                           Row(
@@ -300,13 +256,19 @@ class _HomeView extends StatelessView<HomeViewModel> {
                               const CircleAvatar(
                                 radius: 26,
                                 backgroundColor: Color(0xFFEBF5F8),
+                                child: Image(
+                                  image:
+                                      AssetImage('assets/images/profile.png'),
+                                ),
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              const Text(
-                                "Kerolos Ashraf",
-                                style: TextStyle(
+                              Text(
+                                (viewModel.user != null)
+                                    ? viewModel.user!["name"]
+                                    : "Loading...",
+                                style: const TextStyle(
                                   color: Color(0xFF43617D),
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20,
@@ -333,11 +295,10 @@ class _HomeView extends StatelessView<HomeViewModel> {
                       child: PageView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: viewModel.pageController,
-                        children: const [
-                          SizedBox(),
-                          TicketsScreen(),
-                          UsersScreen(),
-                          AdminsScreen(),
+                        children: [
+                          TicketsScreen(viewModel.searchValue),
+                          UsersScreen(viewModel.searchValue),
+                          AdminsScreen(viewModel.searchValue),
                         ],
                       ),
                     ),

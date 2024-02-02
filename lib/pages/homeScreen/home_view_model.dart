@@ -10,13 +10,32 @@ import 'package:pmvvm/pmvvm.dart';
 class HomeViewModel extends ViewModel {
   SideMenuController sideMenuController = SideMenuController();
   PageController pageController = PageController();
+  Map? user;
+  String searchValue = "";
 
   @override
   void init() {
+    FirebaseFirestore.instance
+        .collection("/Admins")
+        .where(
+          "phone",
+          isEqualTo: FirebaseAuth.instance.currentUser!.phoneNumber,
+        )
+        .get()
+        .then((value) {
+      user = value.docs.first.data();
+      notifyListeners();
+    });
+
     sideMenuController.addListener((index) {
       pageController.jumpToPage(index);
     });
     super.init();
+  }
+
+  void search(String value) {
+    searchValue = value;
+    notifyListeners();
   }
 
   logout() {
