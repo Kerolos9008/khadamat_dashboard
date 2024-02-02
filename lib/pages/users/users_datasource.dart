@@ -17,7 +17,6 @@ class UsersDataSource extends DataTableSource {
     Map<String, dynamic> data =
         _usersList[index].data()! as Map<String, dynamic>;
     data["id"] = _usersList[index].id;
-    print(data);
     return DataRow(
       cells: [
         DataCell(

@@ -42,7 +42,6 @@ class AddUserViewModel extends ViewModel {
         .hasMatch(phoneNumber ?? "")) {
       return true;
     } else {
-      debugPrint(name);
       mobileShakeKey.currentState?.shakeWidget();
       return false;
     }
@@ -52,7 +51,6 @@ class AddUserViewModel extends ViewModel {
     if (name?.isNotEmpty ?? false) {
       return true;
     } else {
-      debugPrint(name);
       nameShakeKey.currentState?.shakeWidget();
       return false;
     }
@@ -62,7 +60,6 @@ class AddUserViewModel extends ViewModel {
     if (project?.isNotEmpty ?? false) {
       return true;
     } else {
-      debugPrint(name);
       nameShakeKey.currentState?.shakeWidget();
       return false;
     }
@@ -72,7 +69,6 @@ class AddUserViewModel extends ViewModel {
     if (name?.isNotEmpty ?? false) {
       return true;
     } else {
-      debugPrint(name);
       nameShakeKey.currentState?.shakeWidget();
       return false;
     }
@@ -82,7 +78,6 @@ class AddUserViewModel extends ViewModel {
     if (name?.isNotEmpty ?? false) {
       return true;
     } else {
-      debugPrint(name);
       nameShakeKey.currentState?.shakeWidget();
       return false;
     }

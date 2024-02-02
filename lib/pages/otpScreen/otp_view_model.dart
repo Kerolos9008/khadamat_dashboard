@@ -53,9 +53,7 @@ class OTPViewModel extends ViewModel {
   verifyOTP() {
     buttonLoading = true;
     notifyListeners();
-    debugPrint(otp);
     firebaseAuthPhone.confirm(otp).then((value) {
-      debugPrint(value.toString());
       buttonLoading = false;
       notifyListeners();
       Navigator.of(context).pushAndRemoveUntil(

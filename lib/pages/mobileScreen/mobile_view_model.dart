@@ -26,7 +26,6 @@ class MobileViewModel extends ViewModel {
 
       if (user.count == 1) {
         FirebaseAuth.instance.signInWithPhoneNumber(phoneNumber!).then((value) {
-          debugPrint(value.verificationId);
           buttonLoading = false;
           notifyListeners();
 

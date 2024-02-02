@@ -62,7 +62,6 @@ class AddAdminViewModel extends ViewModel {
         .hasMatch(phoneNumber ?? "")) {
       return true;
     } else {
-      debugPrint(name);
       mobileShakeKey.currentState?.shakeWidget();
       return false;
     }
@@ -72,7 +71,6 @@ class AddAdminViewModel extends ViewModel {
     if (name?.isNotEmpty ?? false) {
       return true;
     } else {
-      debugPrint(name);
       nameShakeKey.currentState?.shakeWidget();
       return false;
     }
@@ -83,7 +81,6 @@ class AddAdminViewModel extends ViewModel {
     if (checkRole()) {
       return true;
     } else {
-      debugPrint(name);
       checkboxShakeKey.currentState?.shakeWidget();
       return false;
     }
