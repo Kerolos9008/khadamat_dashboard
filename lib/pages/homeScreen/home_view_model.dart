@@ -8,13 +8,15 @@ import 'package:khadamat_dashboard/pages/mobileScreen/mobile_view.dart';
 import 'package:pmvvm/pmvvm.dart';
 
 class HomeViewModel extends ViewModel {
-  SideMenuController sideMenuController = SideMenuController();
-  PageController pageController = PageController();
+  late SideMenuController sideMenuController;
+  late PageController pageController;
   Map? user;
   String searchValue = "";
 
   @override
   void init() {
+    sideMenuController = SideMenuController();
+    pageController = PageController();
     FirebaseFirestore.instance
         .collection("/Admins")
         .where(

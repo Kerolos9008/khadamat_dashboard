@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         Locale('ar', 'SA'),
       ],
       locale: const Locale('ar', 'SA'),
-      title: 'Flutter Demo',
+      title: 'لوحة تحكم خدمات',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
