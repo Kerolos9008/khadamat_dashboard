@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
       locale: const Locale('ar', 'SA'),
       title: 'لوحة تحكم خدمات',
       theme: ThemeData(
+        useMaterial3: false,
         primarySwatch: Colors.blue,
       ),
       home: (FirebaseAuth.instance.currentUser != null)
