@@ -4,6 +4,7 @@ import 'package:khadamat_dashboard/pages/ticketDetailsScreen/ticket_details_view
 import 'package:khadamat_dashboard/pages/tickets/tickets_datasource.dart';
 import 'package:khadamat_dashboard/pages/tickets/tickets_view_model.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class TicketsScreen extends StatelessWidget {
   final String searchValue;
@@ -27,6 +28,8 @@ class _TicketsView extends StatelessView<TicketsViewModel> {
 
   @override
   Widget render(BuildContext context, TicketsViewModel viewModel) {
+    var isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: viewModel.pageController,
@@ -47,9 +50,9 @@ class _TicketsView extends StatelessView<TicketsViewModel> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(
-                  width: 1100,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                  width:  isDesktop ? MediaQuery.of(context).size.width * 0.65  : MediaQuery.of(context).size.width * 0.9,
+                  // padding:
+                  //     const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,

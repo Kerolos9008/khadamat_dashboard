@@ -171,6 +171,7 @@ class _AddUserView extends StatelessView<AddUserViewModel> {
                                   ),
                                   initialCountryCode: 'SA',
                                   onChanged: (phone) {
+                                    print( phone.completeNumber);
                                     viewModel.phoneNumber =
                                         phone.completeNumber;
                                   },
@@ -209,6 +210,7 @@ class _AddUserView extends StatelessView<AddUserViewModel> {
                           const SizedBox(
                             height: 15,
                           ),
+                          //
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.18,
                             child: ShakeWidget(
@@ -371,11 +373,75 @@ class _AddUserView extends StatelessView<AddUserViewModel> {
                       ),
                     ],
                   ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "العنوان",
+                        style: TextStyle(
+                          color: Color(0xFF43617D),
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      //
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.18,
+                        child: ShakeWidget(
+                          key: viewModel.locationShakeKey,
+                          shakeOffset: 10,
+                          child: TextFormField(
+                            initialValue: viewModel.user?["location"],
+                            autovalidateMode:
+                            AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value?.isNotEmpty ?? false) {
+                                return null;
+                              } else {
+                                return "يجب ادخال العنوان";
+                              }
+                            },
+                            onChanged: (value) {
+                              viewModel.location = value;
+                            },
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color(0xFFF3F7F8),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(28),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF7A9CBC),
+                                  width: 1,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(28),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF7A9CBC),
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   InkWell(
-                    onTap: viewModel.submit,
+                    onTap: (){
+                      if(viewModel.user != null ){
+                        viewModel.update();
+                      }else {
+                        viewModel.submit();
+
+                      }
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       width: MediaQuery.of(context).size.width / 4,

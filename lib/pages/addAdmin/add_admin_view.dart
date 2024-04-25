@@ -193,6 +193,63 @@ class _AddAdminView extends StatelessView<AddAdminViewModel> {
                       ),
                     ],
                   ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "العنوان",
+                        style: TextStyle(
+                          color: Color(0xFF43617D),
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.28,
+                        child: ShakeWidget(
+                          key: viewModel.locationShakeKey,
+                          shakeOffset: 10,
+                          child: TextFormField(
+                            initialValue: viewModel.admin?["location"],
+                            autovalidateMode:
+                            AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value?.isNotEmpty ?? false) {
+                                return null;
+                              } else {
+                                return "يجب ادخال الاسم";
+                              }
+                            },
+                            onChanged: (value) {
+                              viewModel.location = value;
+                            },
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color(0xFFF3F7F8),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(28),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF7A9CBC),
+                                  width: 1,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(28),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF7A9CBC),
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,

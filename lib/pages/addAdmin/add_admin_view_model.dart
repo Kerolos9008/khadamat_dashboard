@@ -14,6 +14,7 @@ class AddAdminViewModel extends ViewModel {
   final Map<String, dynamic>? admin;
   String? phoneNumber;
   String? name;
+  String? location;
 
   bool checkboxTouched = false;
   bool buttonLoading = false;
@@ -23,12 +24,14 @@ class AddAdminViewModel extends ViewModel {
 
   final mobileShakeKey = GlobalKey<ShakeWidgetState>();
   final nameShakeKey = GlobalKey<ShakeWidgetState>();
+  final locationShakeKey = GlobalKey<ShakeWidgetState>();
   final checkboxShakeKey = GlobalKey<ShakeWidgetState>();
 
   @override
   void init() {
     name = admin?["name"];
     phoneNumber = admin?["phone"];
+    location = admin?["location"];
     openTicket = admin?["roles"]?["openTicket"] ?? false;
     closeTicket = admin?["roles"]?["closeTicket"] ?? false;
     addAdmins = admin?["roles"]?["addAdmins"] ?? false;
@@ -57,6 +60,8 @@ class AddAdminViewModel extends ViewModel {
     notifyListeners();
   }
 
+
+  ////// validation
   bool validateMobile() {
     if (RegExp(r'^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$')
         .hasMatch(phoneNumber ?? "")) {
@@ -76,6 +81,15 @@ class AddAdminViewModel extends ViewModel {
     }
   }
 
+  bool validateLocation() {
+    if (location?.isNotEmpty ?? false) {
+      return true;
+    } else {
+      nameShakeKey.currentState?.shakeWidget();
+      return false;
+    }
+  }
+
   bool validatecheckBoxGroup() {
     checkboxTouched = true;
     if (checkRole()) {
@@ -87,7 +101,7 @@ class AddAdminViewModel extends ViewModel {
   }
 
   submit() async {
-    if (validateName() && validateMobile() && validatecheckBoxGroup()) {
+    if (validateName() && validateMobile() && validatecheckBoxGroup() && validateLocation()) {
       buttonLoading = true;
       notifyListeners();
       final users = await FirebaseFirestore.instance
@@ -119,6 +133,7 @@ class AddAdminViewModel extends ViewModel {
             "closeTicket": closeTicket,
             "addAdmins": addAdmins,
           },
+          "location":location,
           "createdAt": DateTime.now().millisecondsSinceEpoch,
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });
@@ -139,6 +154,7 @@ class AddAdminViewModel extends ViewModel {
             "closeTicket": closeTicket,
             "addAdmins": addAdmins,
           },
+          "location":location,
           "createdAt": admin?["createdAt"],
           "updatedAt": DateTime.now().millisecondsSinceEpoch,
         });

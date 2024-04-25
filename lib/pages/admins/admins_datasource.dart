@@ -30,6 +30,8 @@ class AdminsDataSource extends DataTableSource {
             ),
             child: Text(
               data["name"],
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Color(0xFF43617D),
                 fontSize: 20,

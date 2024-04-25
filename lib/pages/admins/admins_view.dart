@@ -4,6 +4,7 @@ import 'package:khadamat_dashboard/pages/addAdmin/add_admin_view.dart';
 import 'package:khadamat_dashboard/pages/admins/admins_datasource.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:khadamat_dashboard/pages/admins/admins_view_model.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AdminsScreen extends StatelessWidget {
   final String searchValue;
@@ -23,6 +24,8 @@ class _AdminsView extends StatelessView<AdminsViewModel> {
 
   @override
   Widget render(BuildContext context, AdminsViewModel viewModel) {
+    var isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: viewModel.pageController,
@@ -80,8 +83,9 @@ class _AdminsView extends StatelessView<AdminsViewModel> {
             const SizedBox(height: 25),
             Expanded(
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                width:  isDesktop ? MediaQuery.of(context).size.width * 0.65  : MediaQuery.of(context).size.width * 0.9,
+                // padding:
+                //     const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,

@@ -4,6 +4,7 @@ import 'package:khadamat_dashboard/pages/addUser/add_user_view.dart';
 import 'package:khadamat_dashboard/pages/users/users_datasource.dart';
 import 'package:khadamat_dashboard/pages/users/users_view_model.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class UsersScreen extends StatelessWidget {
   final String searchValue;
@@ -23,6 +24,8 @@ class _UsersView extends StatelessView<UsersViewModel> {
 
   @override
   Widget render(BuildContext context, UsersViewModel viewModel) {
+    var isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: viewModel.pageController,
@@ -82,9 +85,9 @@ class _UsersView extends StatelessView<UsersViewModel> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(
-                  width: 990,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                  width:  isDesktop ? MediaQuery.of(context).size.width * 0.65  : MediaQuery.of(context).size.width * 0.9,
+                  // padding:
+                  //     const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
@@ -112,7 +115,7 @@ class _UsersView extends StatelessView<UsersViewModel> {
                             .toLowerCase()
                             .contains(searchValue.toLowerCase()))
                         .toList();
-
+                      print("this is filtered data ${filteredData.first.id}");
                       return Theme(
                         data: Theme.of(context).copyWith(
                           shadowColor: Colors.transparent,

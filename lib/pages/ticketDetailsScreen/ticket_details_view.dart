@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khadamat_dashboard/models/messages.dart';
 import 'package:khadamat_dashboard/pages/tickets/tickets_view_model.dart';
 import 'package:khadamat_dashboard/widgets/message_widget.dart';
 import 'package:khadamat_dashboard/widgets/shake_widget.dart';
@@ -8,12 +11,16 @@ import 'package:khadamat_dashboard/widgets/ticket_description_widget.dart';
 import 'package:khadamat_dashboard/widgets/ticket_details_widget.dart';
 import 'package:pmvvm/pmvvm.dart';
 
+import '../../models/ticket.dart';
+
 class TicketDetailsScreen extends StatelessWidget {
   const TicketDetailsScreen({
     super.key,
     required this.onBackPressed,
   });
+
   final void Function() onBackPressed;
+
   @override
   Widget build(BuildContext context) {
     return MVVM<TicketsViewModel>(
@@ -27,11 +34,19 @@ class TicketDetailsScreen extends StatelessWidget {
 }
 
 class _TicketDetailsView extends StatelessView<TicketsViewModel> {
-  const _TicketDetailsView(this.onBackPressed);
+  _TicketDetailsView(this.onBackPressed);
+
   final void Function() onBackPressed;
 
   @override
   Widget render(BuildContext context, TicketsViewModel viewModel) {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> streamSubscription =
+        FirebaseFirestore.instance
+            .collection('/Tickets')
+            .doc(viewModel.ticket?["id"])
+            .snapshots();
+
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -140,16 +155,47 @@ class _TicketDetailsView extends StatelessView<TicketsViewModel> {
                 const SizedBox(
                   height: 12,
                 ),
+                //
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: viewModel.ticket?["messages"].length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return MessageWidget(
-                        viewModel.ticket!["messages"][index],
-                      );
-                    },
-                  ),
+                  child: StreamBuilder(
+                      stream: streamSubscription,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasError) {
+                          return const Center(
+                            child: Text('Something went wrong'),
+                          );
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                                color: Color(0xFF1177B8)),
+                          );
+                        } else {
+                          List<Message> messages = List<Message>.from(snapshot
+                              .data["messages"]
+                              .map((x) => Message.fromMap(x)));
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: messages.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return MessageWidget(
+                                  snapshot.data["messages"][index]);
+                            },
+                          );
+                        }
+                      }),
                 ),
+
+                // Expanded(
+                //   child: ListView.builder(
+                //     itemCount: viewModel.ticket?["messages"].length,
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return MessageWidget(
+                //         viewModel.ticket!["messages"][index],
+                //       );
+                //     },
+                //   ),
+                // ),
                 const SizedBox(
                   height: 12,
                 ),

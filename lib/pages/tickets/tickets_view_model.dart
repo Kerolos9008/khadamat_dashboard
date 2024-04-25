@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,8 +10,12 @@ import 'package:khadamat_dashboard/widgets/shake_widget.dart';
 import 'package:pmvvm/view_model.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/ticket.dart';
+
 class TicketsViewModel extends ViewModel {
   PageController pageController = PageController();
+
+  /// all collection strem
   late Stream<QuerySnapshot> collectionStream = FirebaseFirestore.instance
       .collection('/Tickets')
       .orderBy('createdAt', descending: true)
@@ -113,4 +119,37 @@ class TicketsViewModel extends ViewModel {
     buttonLoading = false;
     notifyListeners();
   }
+
+  late Stream<DocumentSnapshot<Object?>> stream = FirebaseFirestore.instance
+      .collection('collectionName')
+      .doc(ticket!['id'])
+      .snapshots();
+  late StreamSubscription<DocumentSnapshot<Object?>> subscription =
+      stream.listen((DocumentSnapshot<Object?> snapshot) {
+    if (snapshot.exists) {
+      // Document data is available
+      var data = snapshot.data();
+      print('Document data: $data');
+    } else {
+      // Document doesn't exist
+      print('Document does not exist.');
+    }
+  });
+
+  late Stream<DocumentSnapshot<Map<String, dynamic>>> streamSubscription  =FirebaseFirestore.instance
+      .collection('/Tickets')
+      .doc(ticket?["id"]).snapshots();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+  late Stream<QuerySnapshot> openTicketsStream = FirebaseFirestore.instance
+      .collection('/Tickets')
+      .doc(ticket!['id']).withConverter<Ticket>(
+      fromFirestore: (snapshot, _) => Ticket.fromFirestore(snapshot),
+      toFirestore: (ticket, _) => {})
+      .snapshots() as Stream<QuerySnapshot<Object?>>;
 }
+//
